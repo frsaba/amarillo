@@ -9,11 +9,13 @@ import uvicorn
 import mimetypes
 from starlette.staticfiles import StaticFiles
 
-from app.routers import carpool, agency, agencyconf, region
+from app.routers import carpool, agency, agencyconf, metrics, region
 from fastapi import FastAPI
 
 # https://pydantic-docs.helpmanual.io/usage/settings/
 from app.views import home
+
+from prometheus_fastapi_instrumentator import Instrumentator
 
 logger.info("Hello Amarillo!")
 
@@ -72,7 +74,10 @@ app.include_router(carpool.router)
 app.include_router(agency.router)
 app.include_router(agencyconf.router)
 app.include_router(region.router)
+app.include_router(metrics.router)
 
+
+Instrumentator().instrument(app).expose(app)
 
 def configure():
     configure_admin_token()

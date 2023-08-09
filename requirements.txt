@@ -18,3 +18,4 @@ geojson-pydantic==0.3.3
 # that listens on file system changes. 
 # Consider running Amarillo e.g. via Docker
 pyinotify==0.9.6
+prometheus-fastapi-instrumentator

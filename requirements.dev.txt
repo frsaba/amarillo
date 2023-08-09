@@ -7,10 +7,11 @@ rtree
 schedule
 pytest
 setproctitle
-starlette=0.17.1
-pandas=1.4.2
+prometheus-fastapi-instrumentator
+starlette==0.17.1
+pandas==1.4.2
 requests==2.27.1
 Shapely==1.8.1.post1
 pyproj==3.3.0
-pyinotify=0.9.6
-geojson-pydantic=0.3.3
+pyinotify==0.9.6
+geojson-pydantic==0.3.3
