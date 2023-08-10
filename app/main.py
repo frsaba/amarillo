@@ -1,6 +1,6 @@
 import logging.config
 
-from app.configuration import configure_services, configure_admin_token
+from app.configuration import configure_enhancer_services, configure_services, configure_admin_token
 
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 logger = logging.getLogger("main")
@@ -77,7 +77,11 @@ app.include_router(region.router)
 app.include_router(metrics.router)
 
 
-Instrumentator().instrument(app).expose(app)
+instrumentator = Instrumentator().instrument(app)
+instrumentator.add(metrics.amarillo_trips_number_total())
+
+
+instrumentator.instrument(app)
 
 def configure():
     configure_admin_token()
