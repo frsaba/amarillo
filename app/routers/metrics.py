@@ -3,19 +3,17 @@ import logging
 import os
 import random
 from typing import Callable
-from app.utils import container
 
 from fastapi import APIRouter, HTTPException, Depends, Request
 from datetime import datetime
-
-
-
 from prometheus_client.exposition import generate_latest
 from prometheus_client import Gauge, Counter
 from prometheus_fastapi_instrumentator.metrics import Info
 from fastapi import Depends, HTTPException
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from fastapi.responses import PlainTextResponse
+
+from app.services.secrets import secrets
 
 logger = logging.getLogger(__name__)
 
@@ -56,19 +54,12 @@ router = APIRouter(
 )
 
 
-fake_users_db = {
-    "user1": {
-        "username": "user1",
-        "password": "pw1",  
-    }
-}
-
 
 @router.get("/")
 def metrics(credentials: HTTPBasicCredentials = Depends(security)):
-    user = fake_users_db.get(credentials.username)
-    #TODO use environment variables METRICS_USERNAME and METRICS_PASSWORD
-    if user is None or not credentials.password == user["password"]:
+    if (credentials.username != secrets.metrics_user 
+        or credentials.password != secrets.metrics_password):
+
         raise HTTPException(
             status_code=401,
             detail="Unauthorized",
