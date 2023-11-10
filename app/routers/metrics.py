@@ -19,25 +19,6 @@ logger = logging.getLogger(__name__)
 
 security = HTTPBasic()
 
-total_requests_metric = Gauge(
-    "total_requests",
-    "Total requests for a specific endpoint",
-    ["endpoint"]
-)
-
-class RequestCounter:
-    def __init__(self):
-        pass
-
-    async def __call__(self, request: Request, call_next):     
-        total_requests_metric.labels(endpoint=f"{request.method} {request.url.path}").inc()
-     
-        response = await call_next(request)
-        
-        return response
-
-
-
 def amarillo_trips_number_total() -> Callable[[Info], None]:
     METRIC = Gauge("amarillo_trips_number_total", "Total number of trips.")
 
@@ -52,8 +33,6 @@ router = APIRouter(
     prefix="/metrics",
     tags=["amarillo_metrics"]
 )
-
-
 
 @router.get("/")
 def metrics(credentials: HTTPBasicCredentials = Depends(security)):

@@ -8,7 +8,6 @@ logger = logging.getLogger("main")
 import uvicorn
 import mimetypes
 from starlette.staticfiles import StaticFiles
-from starlette.middleware.base import BaseHTTPMiddleware
 
 
 from app.routers import carpool, agency, agencyconf, metrics, region
@@ -18,6 +17,7 @@ from fastapi import FastAPI
 from app.views import home
 
 from prometheus_fastapi_instrumentator import Instrumentator
+from prometheus_fastapi_instrumentator import metrics as pfi_metrics
 
 logger.info("Hello Amarillo!")
 
@@ -79,8 +79,8 @@ app.include_router(region.router)
 app.include_router(metrics.router)
 
 
-app.add_middleware(BaseHTTPMiddleware, dispatch=metrics.RequestCounter())
 instrumentator = Instrumentator().instrument(app)
+instrumentator.add(pfi_metrics.default())
 instrumentator.add(metrics.amarillo_trips_number_total())
 
 

@@ -18,7 +18,6 @@ router = APIRouter(
     tags=["region"]
 )
 
-metrics.total_requests_metric.labels(endpoint="/region").set(0)
 
 @router.get("/",
             operation_id="getRegions",
