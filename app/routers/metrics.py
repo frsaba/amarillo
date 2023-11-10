@@ -1,6 +1,6 @@
 import json
 import logging
-import os.path
+import os
 import random
 from typing import Callable
 from app.utils import container
@@ -44,12 +44,10 @@ def amarillo_trips_number_total() -> Callable[[Info], None]:
     METRIC = Gauge("amarillo_trips_number_total", "Total number of trips.")
 
     def instrumentation(info: Info) -> None:
-       
-        #TODO get total trips
-        METRIC.set(100)
+        trips_count = sum([len(files) for r, d, files in os.walk("./data/carpool")])
+        METRIC.set(trips_count)
 
     return instrumentation
-
 
 
 router = APIRouter(
@@ -61,7 +59,7 @@ router = APIRouter(
 fake_users_db = {
     "user1": {
         "username": "user1",
-        "password": "pw1",  #TODO need hash or any auth service
+        "password": "pw1",  
     }
 }
 
@@ -69,6 +67,7 @@ fake_users_db = {
 @router.get("/")
 def metrics(credentials: HTTPBasicCredentials = Depends(security)):
     user = fake_users_db.get(credentials.username)
+    #TODO use environment variables METRICS_USERNAME and METRICS_PASSWORD
     if user is None or not credentials.password == user["password"]:
         raise HTTPException(
             status_code=401,
