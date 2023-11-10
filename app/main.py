@@ -8,6 +8,8 @@ logger = logging.getLogger("main")
 import uvicorn
 import mimetypes
 from starlette.staticfiles import StaticFiles
+from starlette.middleware.base import BaseHTTPMiddleware
+
 
 from app.routers import carpool, agency, agencyconf, metrics, region
 from fastapi import FastAPI
@@ -77,6 +79,7 @@ app.include_router(region.router)
 app.include_router(metrics.router)
 
 
+app.add_middleware(BaseHTTPMiddleware, dispatch=metrics.RequestCounter())
 instrumentator = Instrumentator().instrument(app)
 instrumentator.add(metrics.amarillo_trips_number_total())
 

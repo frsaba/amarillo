@@ -5,7 +5,7 @@ import random
 from typing import Callable
 from app.utils import container
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Request
 from datetime import datetime
 
 
@@ -26,6 +26,19 @@ total_requests_metric = Gauge(
     "Total requests for a specific endpoint",
     ["endpoint"]
 )
+
+class RequestCounter:
+    def __init__(self):
+        pass
+
+    async def __call__(self, request: Request, call_next):     
+        total_requests_metric.labels(endpoint=f"{request.method} {request.url.path}").inc()
+     
+        response = await call_next(request)
+        
+        return response
+
+
 
 def amarillo_trips_number_total() -> Callable[[Info], None]:
     METRIC = Gauge("amarillo_trips_number_total", "Total number of trips.")
@@ -63,5 +76,5 @@ def metrics(credentials: HTTPBasicCredentials = Depends(security)):
             headers={"WWW-Authenticate": "Basic"},
         )
     
-    total_requests_metric.labels(endpoint="/amarillo-metrics").inc()
+    # total_requests_metric.labels(endpoint="/amarillo-metrics").inc()
     return PlainTextResponse(content=generate_latest())
