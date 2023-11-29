@@ -1,7 +1,6 @@
 import logging
 import time
 from typing import List
-import app.routers.metrics as metrics
 
 from fastapi import APIRouter, HTTPException, status, Depends
 
@@ -28,7 +27,6 @@ router = APIRouter(
             )
 async def get_regions() -> List[Region]:
     service: RegionService = container['regions']
-    metrics.total_requests_metric.labels(endpoint="/region").inc()
     return list(service.regions.values())
 
 @router.get("/{region_id}",
