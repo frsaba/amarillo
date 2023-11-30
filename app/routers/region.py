@@ -1,6 +1,7 @@
 import logging
 import time
 from typing import List
+import app.routers.metrics as metrics
 
 from fastapi import APIRouter, HTTPException, status, Depends
 
