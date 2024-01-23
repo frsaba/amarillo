@@ -1,9 +1,9 @@
-from app.tests.sampledata import carpool_1234, data1, carpool_repeating_json, stop_issue
-from app.services.gtfs_export import GtfsExport
-from app.services.gtfs import GtfsRtProducer
-from app.services.stops import StopsStore
-from app.services.trips import TripStore
-from app.models.Carpool import Carpool
+from amarillo.app.tests.sampledata import carpool_1234, data1, carpool_repeating_json, stop_issue
+from amarillo.app.services.gtfs_export import GtfsExport
+from amarillo.app.services.gtfs import GtfsRtProducer
+from amarillo.app.services.stops import StopsStore
+from amarillo.app.services.trips import TripStore
+from amarillo.app.models.Carpool import Carpool
 from datetime import datetime
 import time
 import pytest

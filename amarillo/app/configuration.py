@@ -1,21 +1,21 @@
 # separate file so that it can be imported without initializing FastAPI
-from app.utils.container import container
+from amarillo.app.utils.container import container
 import json
 import logging
 from glob import glob
 
-from app.models.Carpool import Agency, Carpool, Region
-from app.services import stops
-from app.services import trips
-from app.services.agencyconf import AgencyConfService, agency_conf_directory
-from app.services.carpools import CarpoolService
-from app.services.agencies import AgencyService
-from app.services.regions import RegionService
+from amarillo.app.models.Carpool import Agency, Carpool, Region
+from amarillo.app.services import stops
+from amarillo.app.services import trips
+from amarillo.app.services.agencyconf import AgencyConfService, agency_conf_directory
+from amarillo.app.services.carpools import CarpoolService
+from amarillo.app.services.agencies import AgencyService
+from amarillo.app.services.regions import RegionService
 
-from app.services.config import config
+from amarillo.app.services.config import config
 
-from app.utils.utils import assert_folder_exists
-import app.services.gtfs_generator as gtfs_generator
+from amarillo.app.utils.utils import assert_folder_exists
+import amarillo.app.services.gtfs_generator as gtfs_generator
 
 logger = logging.getLogger(__name__)
 

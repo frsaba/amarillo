@@ -1,6 +1,6 @@
 import logging.config
 
-from app.configuration import configure_services, configure_admin_token
+from amarillo.app.configuration import configure_services, configure_admin_token
 
 logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
 logger = logging.getLogger("main")
@@ -9,11 +9,11 @@ import uvicorn
 import mimetypes
 from starlette.staticfiles import StaticFiles
 
-from app.routers import carpool, agency, agencyconf, region
+from amarillo.app.routers import carpool, agency, agencyconf, region
 from fastapi import FastAPI
 
 # https://pydantic-docs.helpmanual.io/usage/settings/
-from app.views import home
+from amarillo.app.views import home
 
 logger.info("Hello Amarillo!")
 
