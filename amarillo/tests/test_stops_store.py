@@ -1,5 +1,5 @@
-from app.services import stops 
-from app.models.Carpool import StopTime
+from amarillo.services import stops 
+from amarillo.models.Carpool import StopTime
 
 def test_load_stops_from_file():
     store = stops.StopsStore([{"url": "app/tests/stops.csv", "vicinity": 50}])
