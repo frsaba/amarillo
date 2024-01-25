@@ -23,7 +23,7 @@ EXPOSE 80
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 
-COPY ./app /app/app
+COPY ./amarillo /app/amarillo
 COPY enhancer.py /app
 COPY prestart.sh /app
 COPY ./static /app/static
