@@ -1,6 +1,6 @@
 from fastapi.testclient import TestClient
-from amarillo.app.main import app
-from amarillo.app.tests.sampledata import carpool_1234, data1
+from amarillo.main import app
+from amarillo.tests.sampledata import carpool_1234, data1
 
 client = TestClient(app)
 

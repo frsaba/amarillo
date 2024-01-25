@@ -3,10 +3,10 @@ from typing import List
 
 from fastapi import APIRouter, HTTPException, status, Header, Depends
 
-from amarillo.app.models.AgencyConf import AgencyConf
-from amarillo.app.services.agencyconf import AgencyConfService
-from amarillo.app.services.config import config
-from amarillo.app.utils.container import container
+from amarillo.models.AgencyConf import AgencyConf
+from amarillo.services.agencyconf import AgencyConfService
+from amarillo.services.config import config
+from amarillo.utils.container import container
 
 logger = logging.getLogger(__name__)
 

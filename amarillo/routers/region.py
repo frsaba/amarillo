@@ -4,10 +4,10 @@ from typing import List
 
 from fastapi import APIRouter, HTTPException, status, Depends
 
-from amarillo.app.models.Carpool import Region
-from amarillo.app.routers.agencyconf import verify_admin_api_key
-from amarillo.app.services.regions import RegionService
-from amarillo.app.utils.container import container
+from amarillo.models.Carpool import Region
+from amarillo.routers.agencyconf import verify_admin_api_key
+from amarillo.services.regions import RegionService
+from amarillo.utils.container import container
 from fastapi.responses import FileResponse
 
 logger = logging.getLogger(__name__)
