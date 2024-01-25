@@ -1,7 +1,7 @@
 from typing import Dict
 from pydantic import Field
 from pydantic_settings import BaseSettings
-
+from typing import Optional
 # Example: secrets = { "mfdz": "some secret" }
 class Secrets(BaseSettings):
     ride2go_token: str = Field(None)
