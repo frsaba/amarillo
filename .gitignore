@@ -139,9 +139,3 @@ gtfs/*.pbf
 gtfs/*.json
 data
 
-#these files are under app/static but they get copied to the outside directory on startup
-logging.conf
-config
-static/**
-templates/**
-conf/**
