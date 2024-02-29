@@ -1,10 +1,9 @@
-from typing import Dict
-from pydantic import Field
+from pydantic import Field, ConfigDict
 from pydantic_settings import BaseSettings
-from typing import Optional
 # Example: secrets = { "mfdz": "some secret" }
 class Secrets(BaseSettings):
-    ride2go_token: str = Field(None)
+    model_config = ConfigDict(extra='allow')
+    ride2go_token: str = Field(None, env = 'RIDE2GO_TOKEN')
     # TODO: admin_token should be moved here instead of config
 
 
