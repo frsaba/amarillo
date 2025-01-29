@@ -11,6 +11,7 @@ class Config(BaseSettings):
     graphhopper_base_url: str = 'https://api.mfdz.de/gh'
     stop_sources_file: str = 'data/stop_sources.json'
     enhancer_url: str = 'http://localhost:8001'
+    max_age_carpool_offers_in_days: int = 180
 
     model_config = ConfigDict(extra='allow') # Allow plugins to add extra values
 
